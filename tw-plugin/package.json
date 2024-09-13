@@ -1,0 +1,22 @@
+{
+  "name": "bombus-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bulingen/bombus-ui.git"
+  },
+  "author": "bulingen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bulingen/bombus-ui/issues"
+  },
+  "homepage": "https://github.com/bulingen/bombus-ui#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.11"
+  }
+}
