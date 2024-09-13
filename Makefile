@@ -8,12 +8,12 @@ help:
 .DEFAULT_GOAL := help
 
 setup-docs:
-	cd docs && yarn
+	cd docs2 && yarn
 
 setup: setup-docs		## setup local environment
 
 build-docs:
-	cd docs && yarn build
+	cd docs2 && yarn build
 
 dev:		## start dev server
-	cd docs && yarn dev
+	cd docs2 && yarn dev
