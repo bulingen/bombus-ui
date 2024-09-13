@@ -1,9 +1,50 @@
 import Image from "next/image";
+import { ReactNode } from "react";
+
+const Container = ({ children }: { children?: ReactNode }) => {
+  return (
+    <div className="h-[200px] w-[500px] flex items-center justify-center">
+      {children}
+    </div>
+  );
+};
+
+const Button = () => {
+  return <button className="btn-primary">Click me</button>;
+};
+
+const ButtonDemo = () => {
+  return (
+    <div className="flex flex-col">
+      <div data-theme="light">
+        <Container>
+          <Button />
+        </Container>
+      </div>
+      <div data-theme="dark">
+        <Container>
+          <Button />
+        </Container>
+      </div>
+      <div data-theme="christmas">
+        <Container>
+          <Button />
+        </Container>
+      </div>
+      <div data-theme="toony">
+        <Container>
+          <Button />
+        </Container>
+      </div>
+    </div>
+  );
+};
 
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+        <ButtonDemo />
         <Image
           className="dark:invert"
           src="https://nextjs.org/icons/next.svg"

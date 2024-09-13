@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import bombusUi from "../tw-plugin/src";
 
 const config: Config = {
   content: [
@@ -14,6 +15,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [bombusUi],
 };
 export default config;
