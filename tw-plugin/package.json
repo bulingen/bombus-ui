@@ -4,7 +4,14 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:components:css": "postcss src/components/index.css -o dist/components.css",
+    "build:components:js": "prejss-cli dist/components.css --format commonjs",
+    "build:components": "yarn build:components:css && yarn build:components:js",
+    "build:utilities:css": "postcss src/utilities/index.css -o dist/utilities.css",
+    "build:utilities:js": "prejss-cli dist/utilities.css --format commonjs",
+    "build:utilities": "yarn build:utilities:css && yarn build:utilities:js",
+    "build": "yarn build:components"
   },
   "repository": {
     "type": "git",
@@ -17,6 +24,13 @@
   },
   "homepage": "https://github.com/bulingen/bombus-ui#readme",
   "devDependencies": {
+    "@types/postcss-js": "^4.0.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "postcss-cli": "^11.0.0",
+    "postcss-import": "^16.1.0",
+    "postcss-js": "^4.0.1",
+    "prejss-cli": "^0.3.3",
     "tailwindcss": "^3.4.11"
   }
 }
