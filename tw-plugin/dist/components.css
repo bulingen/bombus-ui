@@ -48,3 +48,14 @@
   @apply dark:bg-opacity-20;
 } */
 /* } */
+/* bg-[color-mix(in_oklab,oklch(var(--p)),black_7%)] */
+.bg-interaction-primary {
+  background-color: rgb(var(--primary-base) / var(--tw-bg-opacity));
+}
+.bg-interaction-primary-hover {
+  @apply bg-[color-mix(in_oklab,oklch(var(--primary-base)),black_7%)];
+  /* background-color: rgb(var(--primary-base)/var(--tw-bg-opacity)); */
+}
+.butn {
+  @apply bg-interaction-primary hover:bg-interaction-primary-hover;
+}

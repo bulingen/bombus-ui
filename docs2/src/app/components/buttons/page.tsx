@@ -12,7 +12,7 @@ const PrimaryButton = () => {
   return <button className="btn btn-primary">Click me</button>;
 };
 const SecondaryButton = () => {
-  return <button className="btn">Click me</button>;
+  return <button className="butn">Click me</button>;
 };
 const FlatButton = () => {
   return <button className="btn btn-flat">Click me</button>;

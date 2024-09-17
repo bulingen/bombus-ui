@@ -5,11 +5,13 @@ import {
   PluginCreator,
 } from "tailwindcss/types/config";
 import plugin from "tailwindcss/plugin";
-import postcssJs from "postcss-js";
+import { type Hex } from "./themes/types";
+import { light as importedLightTheme } from "./themes/themes";
+import { createBaseTheme } from "./themes/functions";
+// import postcssJs from "postcss-js";
 // import componentsCss from "./components/alerts.css";
 const components = require("../dist/components");
 
-type Hex = `#${string}`;
 type RGB = { r: number; g: number; b: number };
 type ComplexColor = { hex: Hex; rgb: RGB };
 type RGBString = `${number}, ${number}, ${number}`;
@@ -304,10 +306,12 @@ const containerPlugin: PluginCreator = ({
 
   // TODO: probably need DEFAULT for all alias colors. info, danger, primary etc.. not the primitives
   addBase({
-    ":root, .light, [data-theme=light]": {
-      ...createColorTheme(":root"),
-      ...createOtherTheme(":root"),
-    },
+    // ":root, .light, [data-theme=light]": {
+    //   ...createColorTheme(":root"),
+    //   ...createOtherTheme(":root"),
+    // },
+
+    ":root, .light, [data-theme=light]": createBaseTheme(importedLightTheme),
     ".dark, [data-theme=dark]": {
       ...createColorTheme(".dark"),
       ...createOtherTheme(".dark"),
