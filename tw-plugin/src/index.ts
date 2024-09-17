@@ -5,6 +5,9 @@ import {
   PluginCreator,
 } from "tailwindcss/types/config";
 import plugin from "tailwindcss/plugin";
+import postcssJs from "postcss-js";
+// import componentsCss from "./components/alerts.css";
+const components = require("../dist/components");
 
 type Hex = `#${string}`;
 type RGB = { r: number; g: number; b: number };
@@ -305,6 +308,12 @@ const containerPlugin: PluginCreator = ({
   addVariant("christmas", ["&:is(.christmas *)"]);
   addVariant("toony", ["&:is(.toony *)"]);
   // addVariant("dark", ["&:is(.dark *)"]);
+  // console.log("RAW", componentsCss);
+
+  // const resp = postcssJs.parse(componentsCss);
+
+  // console.log("RESP", resp);
+  // console.log("COMPOENTNS", components);
 
   addComponents({
     ".test-class": {
@@ -315,6 +324,7 @@ const containerPlugin: PluginCreator = ({
     },
     ...createPrimaryButton(),
   });
+  addComponents(components);
   addUtilities({
     ".force-blue": {
       "background-color": "blue",
@@ -372,7 +382,7 @@ const config: Partial<Config> = {
   safelist: ["dark"],
 };
 
-console.log("CONFIG", JSON.stringify(config));
+// console.log("CONFIG", JSON.stringify(config));
 
 export default plugin(containerPlugin, config);
 

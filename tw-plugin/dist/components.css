@@ -1,0 +1,50 @@
+/* @layer components { */
+/* @apply rounded-lg p-md text-neutral-900 dark:text-neutral-50; */
+/* .fun-alert-info,
+.fun-alert-warning,
+.fun-alert-danger,
+.fun-alert-success {
+  @apply rounded p-2 text-neutral-900 dark:text-neutral-50 bg-opacity-20;
+} */
+.fun-alert {
+  @apply rounded p-2 text-neutral-900 dark:text-neutral-50 border;
+}
+.fun-alert-info {
+  @apply bg-blue-400 border-blue-400 bg-opacity-20 border-opacity-50;
+  /* @apply dark:bg-blue-400 dark:border-blue-500; */
+  /* @apply dark:border-blue-500; */
+}
+.fun-alert-warning {
+  @apply bg-yellow-400 border-yellow-400 bg-opacity-20 border-opacity-50;
+  /* @apply dark:bg-yellow-400 dark:border-yellow-500; */
+  /* @apply dark:border-yellow-500; */
+}
+.fun-alert-danger {
+  @apply bg-red-400 border-red-400 bg-opacity-20 border-opacity-50;
+  /* @apply dark:border-red-500; */
+}
+.fun-alert-success {
+  @apply bg-green-400 border-green-400 bg-opacity-20 border-opacity-50;
+  /* @apply dark:border-green-400; */
+}
+/* .fun-alert-info .fun-alert-icon {
+  @apply text-blue-600 dark:text-blue-300;
+}
+.fun-alert-warning .fun-alert-icon {
+  @apply text-yellow-600 dark:text-yellow-300;
+}
+.fun-alert-danger .fun-alert-icon {
+  @apply text-red-600 dark:text-red-300;
+}
+.fun-alert-success .fun-alert-icon {
+  @apply text-green-600 dark:text-green-300;
+} */
+/* } */
+/* @layer utilities { */
+/* .fun-alert-info,
+.fun-alert-warning,
+.fun-alert-danger,
+.fun-alert-success {
+  @apply dark:bg-opacity-20;
+} */
+/* } */
