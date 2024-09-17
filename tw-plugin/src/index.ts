@@ -50,8 +50,20 @@ type ThemableShades = {
   900: ThemableColor;
 };
 
+type InteractionComponent = "button" | "radio";
+
+type InteractionShades = {
+  // base: `rgba(var(--color-${InteractionComponent}-base), <alpha-value>)`
+  // hover: `rgba(var(--color-${InteractionComponent}-hover), <alpha-value>)`
+  // pressed: `rgba(var(--color-${InteractionComponent}-pressed), <alpha-value>)`
+  base: `rgba(var(--color-interaction-base), <alpha-value>)`;
+  hover: `rgba(var(--color-interaction-hover), <alpha-value>)`;
+  pressed: `rgba(var(--color-interaction-pressed), <alpha-value>)`;
+};
+
 type ColorAliases = {
   primary: ThemableShades;
+  interaction: InteractionShades;
 };
 
 const palette: ColorPrimitives = {
@@ -184,6 +196,11 @@ const tailwindAliases: ColorAliases = {
     800: "rgba(var(--color-primary-800), <alpha-value>)",
     900: "rgba(var(--color-primary-900), <alpha-value>)",
   },
+  interaction: {
+    base: "rgba(var(--color-interaction-base), <alpha-value>)",
+    hover: "rgba(var(--color-interaction-hover), <alpha-value>)",
+    pressed: "rgba(var(--color-interaction-pressed), <alpha-value>)",
+  },
 };
 
 type CSSVariableKey = `--color-${keyof GunnelTheme}-${keyof ThemableShades}`;
@@ -234,6 +251,7 @@ const createColorTheme = (theme: ThemeName): Korv => {
     "--color-primary-900": toRgbStr(
       palette[theTheme.colorTheme["primary"]]["900"].rgb
     ),
+    // "--color-page": toRgbStr(palette[theTheme.colorTheme["page"]]),
   };
 };
 
@@ -277,6 +295,7 @@ const containerPlugin: PluginCreator = ({
   addComponents,
   addUtilities,
   addVariant,
+  //   theme,
 }) => {
   // TODO: set color-scheme: light and dark. for browsers to know?
   // TODO: also support [data-theme=christmas] and so on.
@@ -304,6 +323,8 @@ const containerPlugin: PluginCreator = ({
     },
   });
 
+  // addBase()
+
   // TODO: do we need a variant for this??
   addVariant("christmas", ["&:is(.christmas *)"]);
   addVariant("toony", ["&:is(.toony *)"]);
@@ -316,13 +337,22 @@ const containerPlugin: PluginCreator = ({
   // console.log("COMPOENTNS", components);
 
   addComponents({
+    ".page": {
+      "@apply bg-neutral-100": {},
+    },
+    ".btn": {
+      "@apply px-2 bg-neutral-300 bg-opacity-50": {},
+    },
+    ".btn.btn-primary": {
+      "@apply px-2 bg-primary-500": {},
+    },
     ".test-class": {
       maxWidth: "1480px",
       margin: "auto",
       paddingLeft: "20px",
       paddingRight: "20px",
     },
-    ...createPrimaryButton(),
+    // ...createPrimaryButton(),
   });
   addComponents(components);
   addUtilities({
