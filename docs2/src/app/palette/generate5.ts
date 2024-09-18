@@ -14,7 +14,7 @@ const stepsFromWhiteToBlack = [
 export const generatePalette5 = (hex: string) => {
   const theColorInOklch = hexToOklch(hex);
   console.log("the color in oklch", theColorInOklch);
-  const stuff = interpolate(["white", hex, "black"], "oklab");
+  const stuff = interpolate(["white", hex, "black"], "oklch");
 
   const results = stepsFromWhiteToBlack.map((step) => {
     return stuff(step);
