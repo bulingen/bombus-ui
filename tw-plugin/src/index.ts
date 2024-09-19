@@ -312,6 +312,7 @@ const containerPlugin: PluginCreator = ({
     // },
     html: {
       "font-size": "14px",
+      // color: "oklch(var(--text-color))",
     },
 
     // NOTE: we can generate content colors probably
@@ -324,6 +325,8 @@ const containerPlugin: PluginCreator = ({
       "--btn-pressed-scale": "0.97",
       "--danger": "0.5557 0.194 19.84",
       "--danger-content": "1 0 0",
+      "--text-color": "0 0 0",
+      color: "oklch(var(--text-color))",
     },
     ".dark, [data-theme=dark]": {
       "--primary": "0.7189 0.148 235.34",
@@ -334,6 +337,8 @@ const containerPlugin: PluginCreator = ({
       "--btn-pressed-scale": "0.97",
       "--danger": "0.6553 0.23187 20.207",
       "--danger-content": "1 0 0",
+      "--text-color": "1 0 0",
+      color: "oklch(var(--text-color))",
     },
     // ":root, .light, [data-theme=light]": createBaseTheme(importedLightTheme),
     // ".dark, [data-theme=dark]": {
