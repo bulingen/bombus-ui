@@ -156,11 +156,6 @@ const ButtonDemo = () => {
           <AllButtons />
         </Container>
       </div>
-      <div data-theme="toony">
-        <Container>
-          <AllButtons />
-        </Container>
-      </div>
     </div>
   );
 };

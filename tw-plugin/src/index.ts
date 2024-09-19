@@ -312,17 +312,18 @@ const containerPlugin: PluginCreator = ({
     // },
     html: {
       "font-size": "14px",
-      // color: "oklch(var(--text-color))",
+      // color: "oklch(var(--text-color))", // the text-color variable is apparently undefined here
     },
 
-    // NOTE: we can generate content colors probably
+    // TODO: need to pass in color-scheme or whatever so that we can set prefers color scheme or how it works?
+    // NOTE: we could generate the oklch values! so that you would only have to pass in hex values
     ".light, [data-theme=light]": {
       "--primary": "0.59 0.14 241.97",
-      "--primary-content": "0.98 0.01 236.74",
+      "--primary-content": "0.98 0.01 236.74", // we could generate this?
       "--outline": "0.21 0.04 265.77",
-      "--outline-content": "0.21 0.04 265.77",
-      "--page": "0.9731 0 0",
-      "--btn-pressed-scale": "0.97",
+      "--outline-content": "0.21 0.04 265.77", // is this unnecessary? just use outline. could be optional?
+      "--page": "0.9731 0 0", // either we need more levels of this, or we do some sort of interpolation or opacity for elements on top
+      "--btn-pressed-scale": "0.97", // let's keep this, but perhaps set to zero to start with?
       "--danger": "0.5557 0.194 19.84",
       "--danger-content": "1 0 0",
       "--text-color": "0 0 0",
@@ -338,6 +339,18 @@ const containerPlugin: PluginCreator = ({
       "--danger": "0.6553 0.23187 20.207",
       "--danger-content": "1 0 0",
       "--text-color": "1 0 0",
+      color: "oklch(var(--text-color))",
+    },
+    "[data-theme=christmas]": {
+      "--primary": "0.77 0.11 43.06",
+      "--primary-content": "0 0 0",
+      "--outline": "0.93 0.03 88.71",
+      "--outline-content": "0.93 0.03 88.71",
+      "--page": "0.47 0.08 148.93",
+      "--btn-pressed-scale": "0.97",
+      "--danger": "0.56 0.15 22.42",
+      "--danger-content": "0.93 0.03 88.71",
+      "--text-color": "0.93 0.03 88.71",
       color: "oklch(var(--text-color))",
     },
     // ":root, .light, [data-theme=light]": createBaseTheme(importedLightTheme),
@@ -431,6 +444,8 @@ const createTheme = (): Theme => {
   };
 };
 
+// TODO: probably we don't need all of these?
+// TODO: but we should provide a color scheme which is inverted in dark mode or something
 const createTheme2 = (): TailwindTheme => {
   return {
     extend: {

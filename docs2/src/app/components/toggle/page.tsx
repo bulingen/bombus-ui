@@ -68,6 +68,11 @@ const Page = () => {
           <Toggles />
         </Container>
       </div>
+      <div data-theme="christmas">
+        <Container>
+          <Toggles />
+        </Container>
+      </div>
     </div>
   );
 };
