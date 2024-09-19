@@ -1,27 +1,32 @@
-/* @import "./alerts.css"; */
 /* bg-[color-mix(in_oklab,oklch(var(--p)),black_7%)] */
 /* .bg-interaction-primary {
   background-color: rgb(var(--primary-base) / var(--tw-bg-opacity));
 } */
+
 /* background-color: rgb(var(--primary-base)/var(--tw-bg-opacity)); */
 /* .bg-interaction-primary-hover {
   @apply bg-[color-mix(in_oklab,oklch(var(--primary-base)),black_7%)];
 } */
+
 /* btn --> quiet button */
 /* btn btn-flat --> flat button */
 /* btn btn-secondary --> outline button, transparent with border */
 /* btn btn-primary --> filled button, transparent with border */
+
 /* btn --> secondary button */
 /* btn btn-primary --> flat button */
 /* btn btn-tertiary --> outline button, transparent with border */
 /* btn btn-quaternary --> filled button, transparent with border */
+
 /* primary --> filled with primary color */
 /* secondary / outline --> border color neutral */
 /* secondary / outline --> border color neutral */
+
 /* primary */
 /* ghost */
 /* outline */
 /* default */
+
 .btn {
   --button-color: var(--outline);
   --button-height: 2.5rem;
@@ -40,14 +45,17 @@
   );
   /* border-color: color-mix(in oklab, white, oklch(var(--button-color)) 5%); */
 }
+
 .btn-outline {
   --button-color: var(--outline);
   @apply border border-outline text-outline-content;
 }
+
 .btn-ghost {
   --button-color: var(--outline);
   @apply text-outline;
 }
+
 .btn-danger {
   --button-color: var(--danger);
   --content-color: var(--danger-content);
@@ -71,6 +79,7 @@
 .btn:focus-visible {
   @apply outline outline-2 outline-offset-2 outline-primary;
 }
+
 .btn-sm {
   --button-height: 1.5rem;
   @apply px-[0.5rem] text-[0.75rem];
@@ -79,14 +88,17 @@
   --button-height: 3.5rem;
   @apply px-[1.5rem] text-[1rem];
 }
+
 .btn-square {
   @apply w-[var(--button-height)] p-[unset];
 }
+
 /* .btn-outline:hover {
 } */
 /* .btn-outline:hover {
   background-color: color-mix(in oklab, oklch(var(--outline)) 10%, white 10%);
 } */
+
 .btn:active:hover,
 .btn-outline:active:hover,
 .btn-ghost:active:hover {
@@ -109,6 +121,7 @@
   /* animation: button-pop 0s ease-out; */
   transform: scale(var(--btn-pressed-scale, 0.97));
 }
+
 /* @keyframes button-pop {
   0% {
     transform: scale(var(--btn-focus-scale, 0.97));
