@@ -1,0 +1,84 @@
+.btn {
+  --button-color: var(--outline);
+  --button-height: 2.5rem;
+  @apply inline-flex font-semibold px-md rounded box-border border border-transparent transition-all text-primary text-[0.875rem];
+  @apply h-[var(--button-height)] items-center justify-center gap-x-sm;
+  transition-property: color, background-color, border-color, opacity,
+    box-shadow, transform;
+}
+.btn:hover,
+.btn-outline:hover,
+.btn-ghost:hover {
+  background-color: color-mix(
+    in oklab,
+    oklch(var(--button-color)) 12.5%,
+    transparent
+  );
+}
+
+.btn-outline {
+  --button-color: var(--outline);
+  @apply border border-outline text-outline-content;
+}
+
+.btn-ghost {
+  --button-color: var(--outline);
+  @apply text-outline;
+}
+
+.btn-danger {
+  --button-color: var(--danger);
+  --content-color: var(--danger-content);
+}
+.btn-primary {
+  --button-color: var(--primary);
+  --content-color: var(--primary-content);
+}
+.btn-primary,
+.btn-danger {
+  background-color: oklch(var(--button-color));
+  border-color: oklch(var(--button-color));
+  color: oklch(var(--content-color));
+}
+.btn-primary:hover,
+.btn-danger:hover {
+  background-color: color-mix(in oklab, oklch(var(--button-color)), black 10%);
+  border-color: color-mix(in oklab, oklch(var(--button-color)), black 10%);
+}
+.btn:focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-primary;
+}
+
+.btn-sm {
+  --button-height: 1.5rem;
+  @apply px-[0.5rem] text-[0.75rem];
+}
+.btn-lg {
+  --button-height: 3.5rem;
+  @apply px-[1.5rem] text-[1rem];
+}
+
+.btn-square {
+  @apply w-[var(--button-height)] p-[unset];
+}
+
+.btn:active:hover,
+.btn-outline:active:hover,
+.btn-ghost:active:hover {
+  background-color: color-mix(
+    in oklab,
+    oklch(var(--button-color)) 25%,
+    transparent
+  );
+}
+.btn-primary:active:hover,
+.btn-primary:active:focus,
+.btn-danger:active:hover,
+.btn-danger:active:focus {
+  background-color: color-mix(in oklab, oklch(var(--button-color)), black 17%);
+  border-color: color-mix(in oklab, oklch(var(--button-color)), black 17%);
+}
+.btn:active:hover,
+.btn:active:focus {
+  transform: scale(var(--btn-pressed-scale, 0.97));
+}

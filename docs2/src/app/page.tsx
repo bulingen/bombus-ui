@@ -5,6 +5,7 @@ export default function Home() {
     <div>
       <Link href="/components/buttons">Buttons</Link>
       <Link href="/components/alerts">Alerts</Link>
+      <Link href="/components/toggle">Toggle</Link>
     </div>
   );
 }

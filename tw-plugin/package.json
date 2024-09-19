@@ -25,8 +25,10 @@
   },
   "homepage": "https://github.com/bulingen/bombus-ui#readme",
   "devDependencies": {
+    "@types/culori": "^2.1.1",
     "@types/postcss-js": "^4.0.4",
     "autoprefixer": "^10.4.20",
+    "culori": "^4.0.1",
     "postcss": "^8.4.47",
     "postcss-cli": "^11.0.0",
     "postcss-import": "^16.1.0",

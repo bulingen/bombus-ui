@@ -5,11 +5,13 @@ import {
   PluginCreator,
 } from "tailwindcss/types/config";
 import plugin from "tailwindcss/plugin";
-import postcssJs from "postcss-js";
+import { type Hex } from "./themes/types";
+import { light as importedLightTheme } from "./themes/themes";
+import { createBaseTheme } from "./themes/functions";
+// import postcssJs from "postcss-js";
 // import componentsCss from "./components/alerts.css";
 const components = require("../dist/components");
 
-type Hex = `#${string}`;
 type RGB = { r: number; g: number; b: number };
 type ComplexColor = { hex: Hex; rgb: RGB };
 type RGBString = `${number}, ${number}, ${number}`;
@@ -50,8 +52,20 @@ type ThemableShades = {
   900: ThemableColor;
 };
 
+type InteractionComponent = "button" | "radio";
+
+type InteractionShades = {
+  // base: `rgba(var(--color-${InteractionComponent}-base), <alpha-value>)`
+  // hover: `rgba(var(--color-${InteractionComponent}-hover), <alpha-value>)`
+  // pressed: `rgba(var(--color-${InteractionComponent}-pressed), <alpha-value>)`
+  base: `rgba(var(--color-interaction-base), <alpha-value>)`;
+  hover: `rgba(var(--color-interaction-hover), <alpha-value>)`;
+  pressed: `rgba(var(--color-interaction-pressed), <alpha-value>)`;
+};
+
 type ColorAliases = {
   primary: ThemableShades;
+  interaction: InteractionShades;
 };
 
 const palette: ColorPrimitives = {
@@ -184,6 +198,11 @@ const tailwindAliases: ColorAliases = {
     800: "rgba(var(--color-primary-800), <alpha-value>)",
     900: "rgba(var(--color-primary-900), <alpha-value>)",
   },
+  interaction: {
+    base: "rgba(var(--color-interaction-base), <alpha-value>)",
+    hover: "rgba(var(--color-interaction-hover), <alpha-value>)",
+    pressed: "rgba(var(--color-interaction-pressed), <alpha-value>)",
+  },
 };
 
 type CSSVariableKey = `--color-${keyof GunnelTheme}-${keyof ThemableShades}`;
@@ -234,6 +253,7 @@ const createColorTheme = (theme: ThemeName): Korv => {
     "--color-primary-900": toRgbStr(
       palette[theTheme.colorTheme["primary"]]["900"].rgb
     ),
+    // "--color-page": toRgbStr(palette[theTheme.colorTheme["page"]]),
   };
 };
 
@@ -277,6 +297,7 @@ const containerPlugin: PluginCreator = ({
   addComponents,
   addUtilities,
   addVariant,
+  //   theme,
 }) => {
   // TODO: set color-scheme: light and dark. for browsers to know?
   // TODO: also support [data-theme=christmas] and so on.
@@ -285,24 +306,57 @@ const containerPlugin: PluginCreator = ({
 
   // TODO: probably need DEFAULT for all alias colors. info, danger, primary etc.. not the primitives
   addBase({
-    ":root, .light, [data-theme=light]": {
-      ...createColorTheme(":root"),
-      ...createOtherTheme(":root"),
+    // ":root, .light, [data-theme=light]": {
+    //   ...createColorTheme(":root"),
+    //   ...createOtherTheme(":root"),
+    // },
+    html: {
+      "font-size": "14px",
+      // color: "oklch(var(--text-color))",
+    },
+
+    // NOTE: we can generate content colors probably
+    ".light, [data-theme=light]": {
+      "--primary": "0.59 0.14 241.97",
+      "--primary-content": "0.98 0.01 236.74",
+      "--outline": "0.21 0.04 265.77",
+      "--outline-content": "0.21 0.04 265.77",
+      "--page": "0.9731 0 0",
+      "--btn-pressed-scale": "0.97",
+      "--danger": "0.5557 0.194 19.84",
+      "--danger-content": "1 0 0",
+      "--text-color": "0 0 0",
+      color: "oklch(var(--text-color))",
     },
     ".dark, [data-theme=dark]": {
-      ...createColorTheme(".dark"),
-      ...createOtherTheme(".dark"),
+      "--primary": "0.7189 0.148 235.34",
+      "--primary-content": "0 0 0",
+      "--outline": "0.98 0 0",
+      "--outline-content": "0.98 0 0",
+      "--page": "0.18 0 0",
+      "--btn-pressed-scale": "0.97",
+      "--danger": "0.6553 0.23187 20.207",
+      "--danger-content": "1 0 0",
+      "--text-color": "1 0 0",
+      color: "oklch(var(--text-color))",
     },
+    // ":root, .light, [data-theme=light]": createBaseTheme(importedLightTheme),
+    // ".dark, [data-theme=dark]": {
+    //   ...createColorTheme(".dark"),
+    //   ...createOtherTheme(".dark"),
+    // },
     // ".christmas": createColorTheme(".christmas"),
-    ".christmas, [data-theme=christmas]": {
-      ...createColorTheme(".christmas"),
-      ...createOtherTheme(".christmas"),
-    },
-    ".toony, [data-theme=toony]": {
-      ...createColorTheme(".toony"),
-      ...createOtherTheme(".toony"),
-    },
+    // ".christmas, [data-theme=christmas]": {
+    //   ...createColorTheme(".christmas"),
+    //   ...createOtherTheme(".christmas"),
+    // },
+    // ".toony, [data-theme=toony]": {
+    //   ...createColorTheme(".toony"),
+    //   ...createOtherTheme(".toony"),
+    // },
   });
+
+  // addBase()
 
   // TODO: do we need a variant for this??
   addVariant("christmas", ["&:is(.christmas *)"]);
@@ -315,15 +369,24 @@ const containerPlugin: PluginCreator = ({
   // console.log("RESP", resp);
   // console.log("COMPOENTNS", components);
 
-  addComponents({
-    ".test-class": {
-      maxWidth: "1480px",
-      margin: "auto",
-      paddingLeft: "20px",
-      paddingRight: "20px",
-    },
-    ...createPrimaryButton(),
-  });
+  // addComponents({
+  //   ".page": {
+  //     "@apply bg-neutral-100": {},
+  //   },
+  //   ".btn": {
+  //     "@apply px-2 bg-neutral-300 bg-opacity-50": {},
+  //   },
+  //   ".btn.btn-primary": {
+  //     "@apply px-2 bg-primary-500": {},
+  //   },
+  //   ".test-class": {
+  //     maxWidth: "1480px",
+  //     margin: "auto",
+  //     paddingLeft: "20px",
+  //     paddingRight: "20px",
+  //   },
+  //   // ...createPrimaryButton(),
+  // });
   addComponents(components);
   addUtilities({
     ".force-blue": {
@@ -367,10 +430,40 @@ const createTheme = (): Theme => {
     },
   };
 };
+
+const createTheme2 = (): TailwindTheme => {
+  return {
+    extend: {
+      colors: {
+        white: "#fff",
+        black: "#000",
+        primary: "oklch(var(--primary)/<alpha-value>)",
+        "primary-content": "oklch(var(--primary-content)/<alpha-value>)",
+        outline: "oklch(var(--outline)/<alpha-value>)",
+        "outline-content": "oklch(var(--outline-content)/<alpha-value>)",
+        page: "oklch(var(--page)/<alpha-value>)",
+      },
+      spacing: {
+        xs: "0.25rem",
+        sm: "0.5rem",
+        md: "1rem",
+        lg: "2rem",
+        xl: "4rem",
+        "2xl": "8rem",
+      },
+    },
+    // extend: {
+    //   primary: "oklch(var(--primary)/<alpha-value>)",
+    //   "primary-content": "oklch(var(--primary-content)/<alpha-value>)",
+    // },
+  };
+};
+
 // your selector must contain `&`
 const config: Partial<Config> = {
   // prefix: "gunlizz-",
-  theme: createTheme(),
+  // theme: createTheme(),
+  theme: createTheme2(),
   darkMode: ["variant", [".dark &", "[data-theme=dark] &"]],
   // TODO: can we do this differently?
   // if you set christmas:some-bg-color the christmas things will be there.
