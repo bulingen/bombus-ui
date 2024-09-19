@@ -18,6 +18,7 @@ export default function Home() {
       <Card href="/components/buttons">Buttons</Card>
       <Card href="/components/alerts">Alerts</Card>
       <Card href="/components/toggle">Toggle</Card>
+      <Card href="/palette">Palette generator</Card>
     </div>
   );
 }

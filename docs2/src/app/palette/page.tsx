@@ -145,25 +145,12 @@ const ShadeGenerator = () => {
   );
 };
 
-const tailwindReds = [
-  "#fef2f2", // 50
-  "#fee2e2", // 100
-  "#fecaca", // 200
-  "#fca5a5", // 300
-  "#f87171", // 400
-  "#ef4444", // 500
-  "#dc2626", // 600
-  "#b91c1c", // 700
-  "#991b1b", // 800
-  "#7f1d1d", // 900
-  "#450a0a", // 950
-];
 const TailwindRedShades = () => {
   const [palette, setPalette] = useState<{ name: string; colors: string[] }>(
     tailwindPalettes[0]
   );
   return (
-    <div className="mt-[382px]">
+    <div className="mt-[360px]">
       <div>
         <select
           onChange={(e) => {
