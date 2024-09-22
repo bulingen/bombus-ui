@@ -327,6 +327,8 @@ const containerPlugin: PluginCreator = ({
       "--danger": "0.5557 0.194 19.84",
       "--danger-content": "1 0 0",
       "--text-color": "0 0 0",
+      "--info": "0.72 0.15 235.34",
+      "--success": "0.65 0.18 146.65",
       color: "oklch(var(--text-color))",
     },
     ".dark, [data-theme=dark]": {
@@ -339,6 +341,8 @@ const containerPlugin: PluginCreator = ({
       "--danger": "0.6553 0.23187 20.207",
       "--danger-content": "1 0 0",
       "--text-color": "1 0 0",
+      "--info": "0.72 0.15 235.34",
+      "--success": "0.65 0.18 146.65",
       color: "oklch(var(--text-color))",
     },
     "[data-theme=christmas]": {
@@ -351,6 +355,8 @@ const containerPlugin: PluginCreator = ({
       "--danger": "0.56 0.15 22.42",
       "--danger-content": "0.93 0.03 88.71",
       "--text-color": "0.93 0.03 88.71",
+      // "--base-color": "0 0 0",
+      "--info": "0.72 0.15 235.34",
       color: "oklch(var(--text-color))",
     },
     // ":root, .light, [data-theme=light]": createBaseTheme(importedLightTheme),

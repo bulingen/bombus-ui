@@ -27,6 +27,43 @@
   @apply bg-green-400 border-green-400 bg-opacity-20 border-opacity-50;
   /* @apply dark:border-green-400; */
 }
+.alert {
+  --alert-contrast: oklch(var(--text-color));
+  --alert-surroundings: oklch(var(--page));
+  --alert-background: color-mix(
+    in oklab,
+    var(--alert-base) 15%,
+    var(--alert-surroundings) 90%
+  );
+  --alert-border: color-mix(
+    in oklab,
+    var(--alert-base) 60%,
+    var(--alert-contrast) 5%
+  );
+  --alert-text: color-mix(
+    in oklab,
+    var(--alert-base) 20%,
+    var(--alert-contrast) 100%
+  );
+
+  @apply rounded-lg p-sm border bg-opacity-20;
+
+  border-color: var(--alert-border);
+
+  /* background-color: var(--alert-background); */
+  /* background-color: oklch(lightness chroma hue); */
+  color: var(--alert-text);
+}
+.alert-info {
+  --alert-base: oklch(var(--info));
+  background-color: oklch(var(--info) / var(--tw-bg-opacity));
+  /* @apply bg-[oklch(var(--info))]; */
+  /* --background: oklch(var(--info)); */
+}
+.alert-success {
+  --alert-base: oklch(var(--success));
+  /* --background: oklch(var(--info)); */
+}
 /* .fun-alert-info .fun-alert-icon {
   @apply text-blue-600 dark:text-blue-300;
 }
