@@ -8,6 +8,7 @@ import plugin from "tailwindcss/plugin";
 import { type Hex } from "./themes/types";
 import { light as importedLightTheme } from "./themes/themes";
 import { createBaseTheme } from "./themes/functions";
+import { generateAlertColorsFromBase } from "./colors";
 // import postcssJs from "postcss-js";
 // import componentsCss from "./components/alerts.css";
 const components = require("../dist/components");
@@ -304,6 +305,10 @@ const containerPlugin: PluginCreator = ({
   // so you can choose whether to use class or attribute
   // NOTE: okay, so the data-theme isn't tree shook at all.
 
+  const lightAlertInfo = generateAlertColorsFromBase("#1cb1f3", false);
+  const darkAlertInfo = generateAlertColorsFromBase("#0185c8", true);
+  const christmasAlertInfo = generateAlertColorsFromBase("#0891b2", true);
+
   // TODO: probably need DEFAULT for all alias colors. info, danger, primary etc.. not the primitives
   addBase({
     // ":root, .light, [data-theme=light]": {
@@ -329,6 +334,12 @@ const containerPlugin: PluginCreator = ({
       "--text-color": "0 0 0",
       "--info": "0.72 0.15 235.34",
       "--success": "0.65 0.18 146.65",
+      // "--info-bg": "0.9771 0.012 236.62",
+      // "--info-bd": "0.9014 0.055 230.9",
+      "--info-bg": lightAlertInfo.background,
+      "--info-bd": lightAlertInfo.border,
+      "--info-fg": "0.5905 0.139 241.74",
+      // "--info-bd": "0.5941 0.207 26.47",
       color: "oklch(var(--text-color))",
     },
     ".dark, [data-theme=dark]": {
@@ -342,6 +353,8 @@ const containerPlugin: PluginCreator = ({
       "--danger-content": "1 0 0",
       "--text-color": "1 0 0",
       "--info": "0.72 0.15 235.34",
+      "--info-bg": darkAlertInfo.background,
+      "--info-bd": darkAlertInfo.border,
       "--success": "0.65 0.18 146.65",
       color: "oklch(var(--text-color))",
     },
@@ -357,6 +370,10 @@ const containerPlugin: PluginCreator = ({
       "--text-color": "0.93 0.03 88.71",
       // "--base-color": "0 0 0",
       "--info": "0.72 0.15 235.34",
+      "--info-bg": christmasAlertInfo.background,
+      "--info-bd": christmasAlertInfo.border,
+      "--info-fg": "0.93 0.03 88.71",
+
       color: "oklch(var(--text-color))",
     },
     // ":root, .light, [data-theme=light]": createBaseTheme(importedLightTheme),

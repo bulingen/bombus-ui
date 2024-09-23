@@ -17,3 +17,27 @@ export type Theme = {
   colorScheme: "light" | "dark";
   primary: ThemeColor;
 };
+
+type OptionalAlertColors = {
+  border: Hex;
+  background: Hex;
+};
+
+type Overrides = {
+  alertColors?: {
+    info?: OptionalAlertColors;
+    success?: OptionalAlertColors;
+    warning?: OptionalAlertColors;
+    danger?: OptionalAlertColors;
+  };
+};
+
+export type ThisIsTheThemeWeNeed = {
+  primary: Hex;
+  info: Hex;
+  danger: Hex;
+  warning: Hex;
+  success: Hex;
+  overrides: OverridesFunction;
+  alertColors?: null;
+};

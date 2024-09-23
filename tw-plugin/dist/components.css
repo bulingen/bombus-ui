@@ -30,23 +30,23 @@
 .alert {
   --alert-contrast: oklch(var(--text-color));
   --alert-surroundings: oklch(var(--page));
-  --alert-background: color-mix(
+  /* --alert-background: color-mix(
     in oklab,
     var(--alert-base) 15%,
     var(--alert-surroundings) 90%
   );
-  --alert-border: color-mix(
+  --alert-border-fallback: color-mix(
     in oklab,
     var(--alert-base) 60%,
     var(--alert-contrast) 5%
-  );
+  ); */
   --alert-text: color-mix(
     in oklab,
     var(--alert-base) 20%,
     var(--alert-contrast) 100%
   );
 
-  @apply rounded-lg p-sm border bg-opacity-20;
+  @apply rounded-lg p-sm border;
 
   border-color: var(--alert-border);
 
@@ -56,9 +56,17 @@
 }
 .alert-info {
   --alert-base: oklch(var(--info));
-  background-color: oklch(var(--info) / var(--tw-bg-opacity));
+  --alert-background: oklch(in oklab, var(--info-bg));
+  /* --alert-border: oklch(in oklab, var(--info-bd)); */
+  /* border-color: oklch(in oklab, var(--info-bd)); */
+  border-color: oklch(var(--info-bd) / var(--tw-bg-opacity));
+  background-color: oklch(var(--info-bg) / var(--tw-bg-opacity));
+
   /* @apply bg-[oklch(var(--info))]; */
   /* --background: oklch(var(--info)); */
+}
+.alert-icon-info {
+  color: oklch(var(--info-fg) / var(--tw-bg-opacity));
 }
 .alert-success {
   --alert-base: oklch(var(--success));
