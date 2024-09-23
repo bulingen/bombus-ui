@@ -61,16 +61,31 @@ const toOklchString = (oklchColor: Oklch): OklchString => {
   return `${l} ${c} ${h}`;
 };
 
-export const generateAlertColorsFromBase = (
+type AlertColorsHex = {
+  border: Hex;
+  background: Hex;
+};
+
+export const generateAlertColorsFromBaseHex = (
   base: Hex,
   isThemeDark: boolean
-): AlertColors => {
+): AlertColorsHex => {
   const steps = isThemeDark ? stepsFromBlackToWhite : stepsFromWhiteToBlack;
   const palette = generatePalette5(base, steps);
   const borderColorHex = palette[2];
   const backgroundColorHex = palette[0];
-  const borderColorOklch = hexToOklch(borderColorHex);
-  const backgroundColorOklch = hexToOklch(backgroundColorHex);
+  return {
+    border: borderColorHex,
+    background: backgroundColorHex,
+  };
+};
+export const generateAlertColorsFromBase = (
+  base: Hex,
+  isThemeDark: boolean
+): AlertColors => {
+  const hexColors = generateAlertColorsFromBaseHex(base, isThemeDark);
+  const borderColorOklch = hexToOklch(hexColors.border);
+  const backgroundColorOklch = hexToOklch(hexColors.background);
   return {
     border: toOklchString(borderColorOklch),
     background: toOklchString(backgroundColorOklch),
