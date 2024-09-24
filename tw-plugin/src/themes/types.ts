@@ -1,9 +1,15 @@
 import {
   generateAlertColorsFromBase,
   generateAlertColorsFromBaseHex,
+  toOklchString,
+  hexToOklch,
+  generateButtonContent,
 } from "../colors";
+import { type OklchString, type Hex } from "../colors";
 
-export type Hex = `#${string}`;
+// export type Hex = `#${string}`;
+// type OklchString = `${number} ${number} ${number}`;
+type NumberString = `${number}`;
 
 export type InteractionStates = {
   base: Hex;
@@ -35,17 +41,40 @@ type Alerts = {
   danger: Partial<AlertColors>;
 };
 
+type WellDefinedAlerts = {
+  info: AlertColors;
+  success: AlertColors;
+  warning: AlertColors;
+  danger: AlertColors;
+};
+
 type Overrides = {
   alerts?: Partial<Alerts>;
+  buttonPressedScale?: number;
+  outline?: Hex;
+  outlineContent?: Hex;
+  infoBackground?: Hex;
+  infoBorder?: Hex;
+  primaryContent?: Hex;
+  dangerContent?: Hex;
 };
 
 export type FullThemeHex = {
   primary: Hex;
+  primaryContent: Hex;
+  outline: Hex;
+  outlineContent: Hex;
+  page: Hex;
+  buttonPressedScale: number;
+  textColor: Hex;
   info: Hex;
+  infoBorder: Hex;
+  infoBackground: Hex;
   danger: Hex;
+  dangerContent: Hex;
   warning: Hex;
   success: Hex;
-  alerts: Alerts;
+  // alerts: WellDefinedAlerts;
 };
 
 export type ThisIsTheThemeWeNeed = {
@@ -55,6 +84,8 @@ export type ThisIsTheThemeWeNeed = {
   danger: Hex;
   warning: Hex;
   success: Hex;
+  page: Hex;
+  textColor: Hex;
   overrides?: Overrides;
 };
 
@@ -71,7 +102,7 @@ const createAlertColors = (
   return alert;
 };
 
-const createAlerts = (inputTheme: ThisIsTheThemeWeNeed): Alerts => {
+const createAlerts = (inputTheme: ThisIsTheThemeWeNeed): WellDefinedAlerts => {
   const info = createAlertColors(
     inputTheme.overrides?.alerts?.info,
     inputTheme.info,
@@ -101,11 +132,71 @@ const createAlerts = (inputTheme: ThisIsTheThemeWeNeed): Alerts => {
   };
 };
 
-const createTheme = (inputTheme: ThisIsTheThemeWeNeed): FullThemeHex => {
+// page --> required
+// button pressed scale --> override, use 0.97 by default
+// text color --> required
+// outline --> override, use text color by default
+// outline content --> override, use text color by default
+// info border --> override, use generateAlertColorsFromBase
+// info background --> override, use generateAlertColorsFromBase
+
+// primary content --> override, generate color based on primary, but on the opposite scale
+// danger content --> override, generate color based on danger, but on the opposite scale
+
+export const createTheme = (inputTheme: ThisIsTheThemeWeNeed): FullThemeHex => {
   const alerts = createAlerts(inputTheme);
   return {
     ...inputTheme,
-    alerts,
+    // alerts,
+    buttonPressedScale: inputTheme.overrides?.buttonPressedScale || 0.97,
+    outline: inputTheme.overrides?.outline || inputTheme.textColor,
+    outlineContent:
+      inputTheme.overrides?.outlineContent || inputTheme.textColor,
+    infoBackground: alerts.info.background,
+    infoBorder: alerts.info.border,
+    primaryContent:
+      inputTheme.overrides?.primaryContent ||
+      generateButtonContent(inputTheme.primary),
+    dangerContent:
+      inputTheme.overrides?.dangerContent ||
+      generateButtonContent(inputTheme.danger),
+  };
+};
+
+type CssVariablesTheme = {
+  "--primary": OklchString;
+  "--primary-content": OklchString;
+  "--outline": OklchString;
+  "--outline-content": OklchString;
+  "--page": OklchString;
+  "--btn-pressed-scale": NumberString;
+  "--danger": OklchString;
+  "--danger-content": OklchString;
+  "--text-color": OklchString;
+  "--info": OklchString;
+  "--info-bg": OklchString;
+  "--info-bd": OklchString;
+  "--success": OklchString;
+  // color: "oklch(var(--text-color))",
+};
+
+export const themeToCssVariables = (
+  themeHex: FullThemeHex
+): CssVariablesTheme => {
+  return {
+    "--primary": toOklchString(hexToOklch(themeHex.primary)),
+    "--primary-content": toOklchString(hexToOklch(themeHex.primaryContent)),
+    "--outline": toOklchString(hexToOklch(themeHex.outline)),
+    "--outline-content": toOklchString(hexToOklch(themeHex.outlineContent)),
+    "--page": toOklchString(hexToOklch(themeHex.page)),
+    "--btn-pressed-scale": `${themeHex.buttonPressedScale}`,
+    "--danger": toOklchString(hexToOklch(themeHex.danger)),
+    "--danger-content": toOklchString(hexToOklch(themeHex.dangerContent)),
+    "--text-color": toOklchString(hexToOklch(themeHex.textColor)),
+    "--info": toOklchString(hexToOklch(themeHex.info)),
+    "--info-bg": toOklchString(hexToOklch(themeHex.infoBackground)),
+    "--info-bd": toOklchString(hexToOklch(themeHex.infoBorder)),
+    "--success": toOklchString(hexToOklch(themeHex.success)),
   };
 };
 

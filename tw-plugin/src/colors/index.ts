@@ -13,14 +13,14 @@ const stepsFromWhiteToBlack = [
 
 const stepsFromBlackToWhite = [...stepsFromWhiteToBlack].reverse();
 
-type Hex = `#${string}`;
-type OklchString = `${number} ${number} ${number}`;
+export type Hex = `#${string}`;
+export type OklchString = `${number} ${number} ${number}`;
 
 type AlertColors = {
   border: OklchString;
   background: OklchString;
 };
-const hexToOklch = (hex: string) => {
+export const hexToOklch = (hex: string) => {
   const converted = oklch(hex);
   if (!converted) {
     throw new Error(`Could not convert to oklch: ${hex}`);
@@ -42,7 +42,7 @@ export const generatePalette5 = (hex: string, steps: number[]): Hex[] => {
   return hexes;
 };
 
-const isColorDark = (color: any) => {
+const isColorDarkish = (color: Hex) => {
   if (wcagContrast(color, "black") < wcagContrast(color, "white")) {
     return true;
   }
@@ -50,11 +50,24 @@ const isColorDark = (color: any) => {
   return false;
 };
 
+const getColorWithHighestContrast = (
+  myColor1: Hex,
+  myColor2: Hex,
+  againstColor: Hex
+): Hex => {
+  if (
+    wcagContrast(myColor1, againstColor) > wcagContrast(myColor2, againstColor)
+  ) {
+    return myColor1;
+  }
+  return myColor2;
+};
+
 const roundTo3Decimals = (input: number) => {
   return Math.round(input * 1000) / 1000;
 };
 
-const toOklchString = (oklchColor: Oklch): OklchString => {
+export const toOklchString = (oklchColor: Oklch): OklchString => {
   const l = roundTo3Decimals(oklchColor.l);
   const c = roundTo3Decimals(oklchColor.c);
   const h = roundTo3Decimals(oklchColor.h || 0);
@@ -90,4 +103,19 @@ export const generateAlertColorsFromBase = (
     border: toOklchString(borderColorOklch),
     background: toOklchString(backgroundColorOklch),
   };
+};
+
+export const generateContrastColor = (color: Hex): Hex => {
+  const shade = 0;
+  const palette1 = generatePalette5(color, stepsFromWhiteToBlack);
+  const palette2 = generatePalette5(color, stepsFromBlackToWhite);
+  const color1 = palette1[shade];
+  const color2 = palette2[shade];
+  return getColorWithHighestContrast(color1, color2, color);
+};
+
+export const generateButtonContent = (base: Hex): Hex => {
+  const isBaseDarkish = isColorDarkish(base);
+  const contrastColor = generateContrastColor(base);
+  return contrastColor;
 };
