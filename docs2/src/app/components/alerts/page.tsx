@@ -9,7 +9,7 @@ const Container = ({ children }: { children?: ReactNode }) => {
   );
 };
 
-const AlertsDemo = () => {
+export const AlertsDemo = () => {
   return (
     <div className="flex flex-col gap-y-4">
       <Alert variant="info" />

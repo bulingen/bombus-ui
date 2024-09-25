@@ -47,6 +47,14 @@ export const Alert = ({
   variant: "info" | "warning" | "success" | "danger";
   children?: ReactNode;
 }) => {
-  const extraClass = `alert-${variant}`;
-  return <div className={`alert ${extraClass}`}>{children}</div>;
+  switch (variant) {
+    case "info":
+      return <div className="alert alert-info">{children}</div>;
+    case "danger":
+      return <div className="alert alert-danger">{children}</div>;
+    case "success":
+      return <div className="alert alert-success">{children}</div>;
+    case "warning":
+      return <div className="alert alert-warning">{children}</div>;
+  }
 };
