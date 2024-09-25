@@ -17,10 +17,10 @@ const Container = ({ children }: { children?: ReactNode }) => {
   );
 };
 
-const AllButtons = () => {
+export const AllButtons = () => {
   return (
-    <div className="flex flex-col space-y-lg">
-      <div className="flex items-center space-x-sm">
+    <div className="flex flex-col gap-y-lg">
+      <div className="flex items-center gap-x-sm">
         <PrimaryButton size="md" />
         <OutlineButton size="md" />
         <DefaultButton size="md" />
@@ -72,7 +72,11 @@ const ButtonDemo = () => {
 };
 
 const ButtonsPage = () => {
-  return <ButtonDemo />;
+  return (
+    <div>
+      <ButtonDemo />
+    </div>
+  );
 };
 
 export default ButtonsPage;

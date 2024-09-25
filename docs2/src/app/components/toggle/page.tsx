@@ -11,7 +11,7 @@ const Container = ({ children }: { children?: ReactNode }) => {
   );
 };
 
-const Toggles = () => {
+export const Toggles = () => {
   return (
     <div>
       <div className="flex space-x-8">
