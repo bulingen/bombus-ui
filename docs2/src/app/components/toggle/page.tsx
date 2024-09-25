@@ -1,38 +1,13 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
+import { Toggle } from "./toggle";
 
 const Container = ({ children }: { children?: ReactNode }) => {
   return (
     <div className="w-[500px] py-xl px-md flex items-center justify-center space-x-2 bg-page">
       {children}
     </div>
-  );
-};
-
-const Toggle = ({
-  initialChecked = false,
-  disabled = false,
-  size = "",
-}: {
-  initialChecked?: boolean;
-  disabled?: boolean;
-  size?: "" | "toggle-sm";
-}) => {
-  const [isChecked, setIsChecked] = useState(initialChecked);
-  return (
-    <label className="flex items-center space-x-sm w-[150px] justify-start cursor-pointer text-nowrap">
-      <input
-        type="checkbox"
-        className={`toggle ${size}`}
-        checked={isChecked}
-        disabled={disabled}
-        onChange={(e) => {
-          setIsChecked(e.target.checked);
-        }}
-      />
-      <span>Am I toggled? {isChecked ? "yes" : "no"}</span>
-    </label>
   );
 };
 
