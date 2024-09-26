@@ -49,7 +49,7 @@ export const Alert = ({
 }) => {
   switch (variant) {
     case "info":
-      return <div className="alert alert-info">{children}</div>;
+      return <div className="alert2 alert2-info">{children}</div>;
     case "danger":
       return <div className="alert alert-danger">{children}</div>;
     case "success":

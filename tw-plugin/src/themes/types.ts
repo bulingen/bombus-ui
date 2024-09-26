@@ -32,6 +32,7 @@ export type Theme = {
 type AlertColors = {
   border: Hex;
   background: Hex;
+  foreground: Hex;
 };
 
 type Alerts = {
@@ -70,6 +71,7 @@ export type FullThemeHex = {
   info: Hex;
   infoBorder: Hex;
   infoBackground: Hex;
+  infoForeground: Hex;
   danger: Hex;
   dangerContent: Hex;
   warning: Hex;
@@ -98,6 +100,7 @@ const createAlertColors = (
   const alert: AlertColors = {
     background: overrides?.background || fallback.background,
     border: overrides?.border || fallback.border,
+    foreground: overrides?.foreground || fallback.foreground,
   };
   return alert;
 };
@@ -154,6 +157,7 @@ export const createTheme = (inputTheme: ThisIsTheThemeWeNeed): FullThemeHex => {
       inputTheme.overrides?.outlineContent || inputTheme.textColor,
     infoBackground: alerts.info.background,
     infoBorder: alerts.info.border,
+    infoForeground: alerts.info.foreground,
     primaryContent:
       inputTheme.overrides?.primaryContent ||
       generateButtonContent(inputTheme.primary),
@@ -176,6 +180,7 @@ type CssVariablesTheme = {
   "--info": OklchString;
   "--info-bg": OklchString;
   "--info-bd": OklchString;
+  "--info-fg": OklchString;
   "--success": OklchString;
   // color: "oklch(var(--text-color))",
 };
@@ -196,6 +201,7 @@ export const themeToCssVariables = (
     "--info": toOklchString(hexToOklch(themeHex.info)),
     "--info-bg": toOklchString(hexToOklch(themeHex.infoBackground)),
     "--info-bd": toOklchString(hexToOklch(themeHex.infoBorder)),
+    "--info-fg": toOklchString(hexToOklch(themeHex.infoForeground)),
     "--success": toOklchString(hexToOklch(themeHex.success)),
   };
 };

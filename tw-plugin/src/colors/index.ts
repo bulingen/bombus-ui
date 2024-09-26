@@ -77,19 +77,23 @@ export const toOklchString = (oklchColor: Oklch): OklchString => {
 type AlertColorsHex = {
   border: Hex;
   background: Hex;
+  foreground: Hex;
 };
 
 export const generateAlertColorsFromBaseHex = (
   base: Hex,
   isThemeDark: boolean
 ): AlertColorsHex => {
-  const steps = isThemeDark ? stepsFromBlackToWhite : stepsFromWhiteToBlack;
-  const palette = generatePalette5(base, steps);
+  const baseSteps = isThemeDark ? stepsFromBlackToWhite : stepsFromWhiteToBlack;
+  const palette = generatePalette5(base, baseSteps);
+  // const contrastPalette = generatePalette5(base, contrastSteps)
   const borderColorHex = palette[2];
   const backgroundColorHex = palette[0];
+  const foregroundColorHex = palette[10];
   return {
     border: borderColorHex,
     background: backgroundColorHex,
+    foreground: foregroundColorHex,
   };
 };
 export const generateAlertColorsFromBase = (

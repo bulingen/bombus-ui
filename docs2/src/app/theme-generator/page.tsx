@@ -9,7 +9,7 @@ import { AllButtons } from "../components/buttons/page";
 import { Toggles } from "../components/toggle/page";
 import { AlertsDemo } from "../components/alerts/page";
 
-const themes = ["light", "dark", "christmas", "christmas2"] as const;
+const themes = ["light", "dark", "christmas", "christmas2", "light2"] as const;
 
 type Theme = (typeof themes)[number];
 const Demo = ({ theme }: { theme: Theme }) => {

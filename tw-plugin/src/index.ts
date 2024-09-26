@@ -87,6 +87,24 @@ const containerPlugin: PluginCreator = ({
     warning: "#FF9800",
   });
 
+  // dark
+  // page: "#121212",
+  const generatedLightTheme = createTheme({
+    textColor: "#000",
+    page: "#f6f6f6",
+    isDarkish: false,
+    primary: "#0085c8",
+    // primary: "#0185c8",
+    // primary: "#026aa2",
+    danger: "#cc2c41",
+    info: "#1cb3f3",
+    success: "#20ac43",
+    warning: "#eac900",
+    overrides: {
+      // primaryContent: "#fff",
+    },
+  });
+
   // TODO: probably need DEFAULT for all alias colors. info, danger, primary etc.. not the primitives
   addBase({
     // ":root, .light, [data-theme=light]": {
@@ -154,6 +172,7 @@ const containerPlugin: PluginCreator = ({
       color: "oklch(var(--text-color))",
     },
     "[data-theme=christmas2]": themeToCssVariables(generatedChristmasTheme),
+    "[data-theme=light2]": themeToCssVariables(generatedLightTheme),
     // },
   });
 
